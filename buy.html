@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Skillsync</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
+            color: #f0f0f0;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header - Updated to match home page */
+        header {
+            padding: 20px 0;
+            position: relative;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .nav-center {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-center a {
+            color: #d0d0d0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 10px 20px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .nav-center a:hover {
+            color: #00c4dd;
+            background: rgba(0, 196, 221, 0.1);
+        }
+
+        .nav-center a.active {
+            color: #00c4dd;
+            background: rgba(0, 196, 221, 0.15);
+            box-shadow: 0 2px 10px rgba(0, 196, 221, 0.2);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-right .login-btn {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+        }
+
+        .nav-right .login-btn:hover {
+            color: #00c4dd;
+            border-color: rgba(0, 196, 221, 0.3);
+            background: rgba(0, 196, 221, 0.05);
+        }
+
+        .nav-right .join-btn {
+            background: linear-gradient(135deg, #00c4dd 0%, #009bb3 100%);
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 196, 221, 0.25);
+        }
+
+        .nav-right .join-btn:hover {
+            background: linear-gradient(135deg, #009bb3 0%, #00c4dd 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 196, 221, 0.35);
+        }
+
+        /* Main Content */
+        .checkout-section {
+            padding: 60px 0;
+        }
+
+        .checkout-container {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .checkout-form {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-section {
+            margin-bottom: 40px;
+        }
+
+        .form-section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #d0d0d0;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #00c4dd;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: fit-content;
+        }
+
+        .order-summary h2 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+
+        .plan-selected {
+            background: rgba(0, 196, 221, 0.08);
+            border: 1px solid #00c4dd;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .plan-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: #00c4dd;
+            color: #000000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .plan-name {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .plan-price {
+            font-size: 28px;
+            color: #00c4dd;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .plan-features {
+            list-style: none;
+        }
+
+        .plan-features li {
+            padding: 5px 0;
+            color: #d0d0d0;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .plan-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #00c4dd;
+            font-weight: bold;
+        }
+
+        .order-details {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+
+        .order-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: #d0d0d0;
+        }
+
+        .order-line.total {
+            font-size: 20px;
+            font-weight: bold;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
+            margin-top: 15px;
+            color: #ffffff;
+        }
+
+        .order-line.total .amount {
+            color: #00c4dd;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00c4dd 0%, #009bb3 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 196, 221, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 196, 221, 0.35);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #d0d0d0;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+        }
+
+        .security-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(76, 175, 80, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(76, 175, 80, 0.2);
+        }
+
+        .security-info::before {
+            content: "🔒";
+            font-size: 16px;
+        }
+
+        .security-info span {
+            color: #4caf50;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .checkout-form,
+            .order-summary {
+                padding: 30px 20px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .nav-center {
+                display: none;
+            }
+            
+            .nav-right {
+                gap: 10px;
+            }
+            
+            .nav-right .join-btn {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Skillsync</div>
+            <ul class="nav-center">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="product.html">Product</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="login.html" class="login-btn">Login</a>
+                <a href="login.html" class="join-btn">Join Now</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="checkout-section">
+        <div class="container">
+            <div class="checkout-container">
+                <div class="checkout-form">
+                    <form id="checkout-form">
+                        <div class="form-section">
+                            <h2>Billing Information</h2>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" id="firstName" name="firstName" placeholder="John" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" id="address" name="address" placeholder="123 Main Street" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" id="city" name="city" placeholder="New York" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="state">State</label>
+                                    <select id="state" name="state" required>
+                                        <option value="">Select State</option>
+                                        <option value="CA">California</option>
+                                        <option value="NY">New York</option>
+                                        <option value="TX">Texas</option>
+                                        <option value="FL">Florida</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="zip">ZIP Code</label>
+                                    <input type="text" id="zip" name="zip" placeholder="12345" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h2>Payment Information</h2>
+                            <div class="form-group">
+                                <label for="cardNumber">Card Number</label>
+                                <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="expiry">Expiry Date</label>
+                                    <input type="text" id="expiry" name="expiry" placeholder="MM/YY" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cvv">CVV</label>
+                                    <input type="text" id="cvv" name="cvv" placeholder="123" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="security-info">
+                            <span>Your payment information is secure and encrypted</span>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="order-summary">
+                    <h2>Order Summary</h2>
+                    
+                    <div class="plan-selected">
+                        <div class="plan-badge">Most Popular</div>
+                        <div class="plan-name">Pro</div>
+                        <div class="plan-price">$29<span style="font-size: 16px; color: #ffffff;">/month</span></div>
+                        <ul class="plan-features">
+                            <li>Advanced matching algorithm</li>
+                            <li>Unlimited trainer messaging</li>
+                            <li>Video session booking</li>
+                            <li>Detailed progress analytics</li>
+                            <li>Priority customer support</li>
+                            <li>Training plan templates</li>
+                        </ul>
+                    </div>
+
+                    <div class="order-details">
+                        <div class="order-line">
+                            <span>Pro Plan (Monthly)</span>
+                            <span>$29.00</span>
+                        </div>
+                        <div class="order-line">
+                            <span>Tax</span>
+                            <span>$2.32</span>
+                        </div>
+                        <div class="order-line total">
+                            <span>Total</span>
+                            <span class="amount">$31.32</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" form="checkout-form">Complete Purchase</button>
+                    <button type="button" class="btn btn-secondary">Back to Plans</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('checkout-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your purchase! Your Pro subscription is now active.');
+        });
+
+        // Format card number input
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        // Format expiry date input
+        document.getElementById('expiry').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // Only allow numbers for CVV
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+    </script>
+</body>
+</html>

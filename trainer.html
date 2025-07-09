@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Trainers - Skillsync</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-container">
+        <a href="index.html">
+            <div class="logo">Skillsync</div>
+        </a>e
+       
+        <div class="auth-buttons">
+            <a href="login.html" class="login-btn">Login</a>
+            <a href="login.html" class="join-btn">Join Now</a>
+            <a href="index.html" class="home-btn">Home</a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <h1 class="page-title">Browse Trainers</h1>
+        <p class="page-subtitle">Find the perfect trainer for your fitness journey in your area</p>
+
+        <div class="filters-section">
+            <h2 class="filters-title">Filter Trainers</h2>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label class="filter-label">Location</label>
+                    <input type="text" class="filter-input" placeholder="Enter your city or ZIP code" id="locationFilter">
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Distance</label>
+                    <select class="filter-select" id="distanceFilter">
+                        <option value="">Any distance</option>
+                        <option value="5">Within 5 miles</option>
+                        <option value="10">Within 10 miles</option>
+                        <option value="25">Within 25 miles</option>
+                        <option value="50">Within 50 miles</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Price Range</label>
+                    <select class="filter-select" id="priceFilter">
+                        <option value="">Any price</option>
+                        <option value="0-50">$0 - $50/hour</option>
+                        <option value="50-100">$50 - $100/hour</option>
+                        <option value="100-150">$100 - $150/hour</option>
+                        <option value="150+">$150+/hour</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Experience Level</label>
+                    <select class="filter-select" id="experienceFilter">
+                        <option value="">Any experience</option>
+                        <option value="beginner">Beginner Friendly</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                        <option value="expert">Expert Level</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label class="filter-label">Sports & Activities</label>
+                    <div class="sport-chips">
+                        <div class="sport-chip" onclick="toggleSport(this)">Personal Training</div>
+                        <div class="sport-chip" onclick="toggleSport(this)">Yoga</div>
+                        <div class="sport-chip" onclick="toggleSport(this)">Pilates</div>
+                        <div class="sport-chip" onclick="toggleSport(this)">CrossFit</div>
+                        <div class="sport-chip" onclick="toggleSport(this)">Boxing</div>
+                        <div class="sport-chip" onclick="toggleSport(this)">Running</div>
+                        <div class="sport-chip" onclick="toggleSport(this)">Swimming</div>
+                        <div class="sport-chip" onclick="toggleSport(this)">Cycling</div>
+                        <div class="sport-chip" onclick="toggleSport(this)">Martial Arts</div>
+                        <div class="sport-chip" onclick="toggleSport(this)">Dance</div>
+                        <div class="sport-chip" onclick="toggleSport(this)">Strength Training</div>
+                        <div class="sport-chip" onclick="toggleSport(this)">Nutrition</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="trainers-grid" id="trainersGrid">
+            <!-- Trainers will be populated here -->
+        </div>
+    </div>
+
+    <script>
+        // Sample trainer data
+        const trainers = [
+            {
+                id: 1,
+                name: "Sarah Johnson",
+                rating: 4.9,
+                reviews: 127,
+                specialties: ["Personal Training", "Yoga", "Nutrition"],
+                experience: "5+ years",
+                clients: 200,
+                price: 75,
+                location: "Downtown",
+                distance: 2.3,
+                avatar: "SJ"
+            },
+            {
+                id: 2,
+                name: "Mike Chen",
+                rating: 4.8,
+                reviews: 89,
+                specialties: ["CrossFit", "Boxing", "Strength Training"],
+                experience: "7+ years",
+                clients: 150,
+                price: 80,
+                location: "Westside",
+                distance: 4.1,
+                avatar: "MC"
+            },
+            {
+                id: 3,
+                name: "Emily Rodriguez",
+                rating: 4.9,
+                reviews: 156,
+                specialties: ["Pilates", "Dance", "Flexibility"],
+                experience: "6+ years",
+                clients: 180,
+                price: 70,
+                location: "Eastside",
+                distance: 3.7,
+                avatar: "ER"
+            },
+            {
+                id: 4,
+                name: "David Thompson",
+                rating: 4.7,
+                reviews: 203,
+                specialties: ["Running", "Cycling", "Triathlon"],
+                experience: "10+ years",
+                clients: 300,
+                price: 78,
+                location: "Northside",
+                distance: 5.2,
+                avatar: "DT"
+            },
+            {
+                id: 5,
+                name: "Lisa Park",
+                rating: 4.9,
+                reviews: 94,
+                specialties: ["Swimming", "Water Aerobics", "Rehabilitation"],
+                experience: "8+ years",
+                clients: 120,
+                price: 72,
+                location: "Central",
+                distance: 1.8,
+                avatar: "LP"
+            },
+            {
+                id: 6,
+                name: "Alex Martinez",
+                rating: 4.6,
+                reviews: 67,
+                specialties: ["Martial Arts", "Boxing", "Self Defense"],
+                experience: "12+ years",
+                clients: 250,
+                price: 80,
+                location: "Southside",
+                distance: 6.1,
+                avatar: "AM"
+            }
+        ];
+
+        function renderTrainers(trainersToShow = trainers) {
+            const grid = document.getElementById('trainersGrid');
+            
+            if (trainersToShow.length === 0) {
+                grid.innerHTML = '<div class="no-results">No trainers found matching your criteria. Try adjusting your filters.</div>';
+                return;
+            }
+
+            grid.innerHTML = trainersToShow.map(trainer => `
+                <div class="trainer-card" onclick="viewTrainer(${trainer.id})">
+                    <div class="trainer-header">
+                        <div class="trainer-avatar">${trainer.avatar}</div>
+                        <div class="trainer-info">
+                            <h3>${trainer.name}</h3>
+                            <div class="trainer-rating">
+                                <span>⭐ ${trainer.rating}</span>
+                                <span>(${trainer.reviews} reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trainer-specialties">
+                        ${trainer.specialties.map(specialty => `<span class="specialty-tag">${specialty}</span>`).join('')}
+                    </div>
+                    <div class="trainer-stats">
+                        <span>📍 ${trainer.distance} miles away</span>
+                        <span>👥 ${trainer.clients}+ clients</span>
+                        <span>📅 ${trainer.experience}</span>
+                    </div>
+                    <div class="trainer-price">$${trainer.price}/hour</div>
+                    <button class="contact-btn">Contact Trainer</button>
+                </div>
+            `).join('');
+        }
+
+        function toggleSport(element) {
+            element.classList.toggle('active');
+            filterTrainers();
+        }
+
+        function filterTrainers() {
+            const locationFilter = document.getElementById('locationFilter').value.toLowerCase();
+            const distanceFilter = document.getElementById('distanceFilter').value;
+            const priceFilter = document.getElementById('priceFilter').value;
+            const experienceFilter = document.getElementById('experienceFilter').value;
+            
+            const activeSports = Array.from(document.querySelectorAll('.sport-chip.active'))
+                .map(chip => chip.textContent);
+
+            let filteredTrainers = trainers.filter(trainer => {
+                // Location filter
+                if (locationFilter && !trainer.location.toLowerCase().includes(locationFilter)) {
+                    return false;
+                }
+
+                // Distance filter
+                if (distanceFilter && trainer.distance > parseInt(distanceFilter)) {
+                    return false;
+                }
+
+                // Price filter
+                if (priceFilter) {
+                    if (priceFilter === '150+' && trainer.price < 150) return false;
+                    if (priceFilter !== '150+') {
+                        const [min, max] = priceFilter.split('-').map(Number);
+                        if (trainer.price < min || trainer.price > max) return false;
+                    }
+                }
+
+                // Sports filter
+                if (activeSports.length > 0) {
+                    const hasMatchingSport = activeSports.some(sport => 
+                        trainer.specialties.includes(sport)
+                    );
+                    if (!hasMatchingSport) return false;
+                }
+
+                return true;
+            });
+
+            renderTrainers(filteredTrainers);
+        }
+
+        function viewTrainer(trainerId) {
+            alert(`Viewing trainer profile for ID: ${trainerId}`);
+        }
+
+        function goHome() {
+            alert('Navigating to home page...');
+        }
+
+        // Set up event listeners
+        document.getElementById('locationFilter').addEventListener('input', filterTrainers);
+        document.getElementById('distanceFilter').addEventListener('change', filterTrainers);
+        document.getElementById('priceFilter').addEventListener('change', filterTrainers);
+        document.getElementById('experienceFilter').addEventListener('change', filterTrainers);
+
+        // Initial render
+        renderTrainers();
+    </script>
+</body>
+</html>

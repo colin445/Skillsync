@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Become a Trainer - Skillsync</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0d0d1a 0%, #0f1419 50%, #0a1a2e 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #20b2aa;
+        }
+
+        .nav-links a.active {
+            color: #20b2aa;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .login-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .login-btn:hover {
+            color: #20b2aa;
+        }
+
+        .join-btn {
+            background: #20b2aa;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+
+        .join-btn:hover {
+            background: #1a9999;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #20b2aa, #87ceeb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: #e0e0e0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* Application Form */
+        .application-form {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            margin-bottom: 4rem;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .form-section h3 {
+            color: #20b2aa;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #e0e0e0;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #20b2aa;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #20b2aa, #1a9999);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            width: 100%;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(32, 178, 170, 0.4);
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefits h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #20b2aa;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(32, 178, 170, 0.3);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #20b2aa;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .benefit-card p {
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        /* Requirements Section */
+        .requirements {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .requirements-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .requirements h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #20b2aa;
+        }
+
+        .requirements-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .requirement-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+
+        .requirement-item h4 {
+            color: #20b2aa;
+            margin-bottom: 0.5rem;
+        }
+
+        .requirement-item p {
+            color: #e0e0e0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .form-row {
+                flex-direction: column;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .requirements-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Skillsync</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#product">Product</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="auth-buttons">
+            <a href="login.html" class="login-btn">Login</a>
+            <a href="login.html" class="join-btn">Join Now</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Become a Trainer</h1>
+        <p>Join our community of professional trainers and help people achieve their fitness goals. Share your expertise, build your client base, and grow your fitness career with Skillsync.</p>
+    </section>
+
+    <!-- Application Form -->
+    <section class="application-form">
+        <form id="trainerApplication">
+            <div class="form-section">
+                <h3>Personal Information</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="location">Location/City *</label>
+                        <input type="text" id="location" name="location" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience">Years of Experience *</label>
+                        <select id="experience" name="experience" required>
+                            <option value="">Select experience level</option>
+                            <option value="1-2">1-2 years</option>
+                            <option value="3-5">3-5 years</option>
+                            <option value="5-10">5-10 years</option>
+                            <option value="10+">10+ years</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Professional Details</h3>
+                <div class="form-group">
+                    <label for="certifications">Certifications *</label>
+                    <textarea id="certifications" name="certifications" placeholder="List your relevant certifications (e.g., NASM, ACSM, ACE, etc.)" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Training Specialties *</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="strength" name="specialties" value="strength">
+                            <label for="strength">Strength Training</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="cardio" name="specialties" value="cardio">
+                            <label for="cardio">Cardio/Endurance</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="yoga" name="specialties" value="yoga">
+                            <label for="yoga">Yoga</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pilates" name="specialties" value="pilates">
+                            <label for="pilates">Pilates</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="hiit" name="specialties" value="hiit">
+                            <label for="hiit">HIIT</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="nutrition" name="specialties" value="nutrition">
+                            <label for="nutrition">Nutrition Coaching</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="rehabilitation" name="specialties" value="rehabilitation">
+                            <label for="rehabilitation">Rehabilitation</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sports" name="specialties" value="sports">
+                            <label for="sports">Sports Performance</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="rateRange">Hourly Rate Range *</label>
+                        <select id="rateRange" name="rateRange" required>
+                            <option value="">Select rate range</option>
+                            <option value="25-40">$25-40/hour</option>
+                            <option value="40-60">$40-60/hour</option>
+                            <option value="60-80">$60-80/hour</option>
+                            <option value="80-100">$80-100/hour</option>
+                            <option value="100+">$100+/hour</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="availability">Availability *</label>
+                        <select id="availability" name="availability" required>
+                            <option value="">Select availability</option>
+                            <option value="full-time">Full-time</option>
+                            <option value="part-time">Part-time</option>
+                            <option value="weekends">Weekends only</option>
+                            <option value="evenings">Evenings only</option>
+                            <option value="flexible">Flexible</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>About You</h3>
+                <div class="form-group">
+                    <label for="bio">Professional Bio *</label>
+                    <textarea id="bio" name="bio" placeholder="Tell us about your training philosophy, approach, and what makes you unique as a trainer..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="motivation">Why do you want to join Skillsync? *</label>
+                    <textarea id="motivation" name="motivation" placeholder="What motivates you to become a trainer on our platform?" required></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Application</button>
+        </form>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <h2>Why Trainers Choose Skillsync</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">💰</div>
+                <h3>Competitive Earnings</h3>
+                <p>Set your own rates and keep up to 85% of your earnings. No hidden fees or complicated commission structures.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🎯</div>
+                <h3>Targeted Client Matching</h3>
+                <p>Our AI-powered matching system connects you with clients who align with your expertise and training style.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">📱</div>
+                <h3>Professional Tools</h3>
+                <p>Access our comprehensive trainer dashboard with scheduling, progress tracking, and client communication tools.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🏆</div>
+                <h3>Career Growth</h3>
+                <p>Build your reputation with our review system and gain access to continuing education resources.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🤝</div>
+                <h3>Support Network</h3>
+                <p>Join a community of professional trainers and receive ongoing support from our team.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">⚡</div>
+                <h3>Flexible Schedule</h3>
+                <p>Work on your own terms with complete control over your availability and training locations.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Requirements Section -->
+    <section class="requirements">
+        <div class="requirements-content">
+            <h2>Requirements to Join</h2>
+            <div class="requirements-list">
+                <div class="requirement-item">
+                    <h4>Valid Certification</h4>
+                    <p>Must hold current certification from a recognized fitness organization (NASM, ACSM, ACE, etc.)</p>
+                </div>
+                <div class="requirement-item">
+                    <h4>Insurance Coverage</h4>
+                    <p>Professional liability insurance required (we can help you obtain coverage)</p>
+                </div>
+                <div class="requirement-item">
+                    <h4>Background Check</h4>
+                    <p>Clean background check required for client safety and trust</p>
+                </div>
+                <div class="requirement-item">
+                    <h4>Minimum Experience</h4>
+                    <p>At least 1 year of professional training experience or equivalent</p>
+                </div>
+                <div class="requirement-item">
+                    <h4>CPR/AED Certified</h4>
+                    <p>Current CPR and AED certification from an accredited provider</p>
+                </div>
+                <div class="requirement-item">
+                    <h4>Professional References</h4>
+                    <p>2-3 professional references from previous employers or clients</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('trainerApplication').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const specialties = [];
+            const checkboxes = document.querySelectorAll('input[name="specialties"]:checked');
+            checkboxes.forEach(checkbox => specialties.push(checkbox.value));
+            
+            // Create application object
+            const application = {
+                personalInfo: {
+                    firstName: formData.get('firstName'),
+                    lastName: formData.get('lastName'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    location: formData.get('location'),
+                    experience: formData.get('experience')
+                },
+                professionalDetails: {
+                    certifications: formData.get('certifications'),
+                    specialties: specialties,
+                    rateRange: formData.get('rateRange'),
+                    availability: formData.get('availability')
+                },
+                about: {
+                    bio: formData.get('bio'),
+                    motivation: formData.get('motivation')
+                },
+                submittedAt: new Date().toISOString()
+            };
+            
+            // Simulate form submission
+            console.log('Trainer Application Submitted:', application);
+            
+            // Show success message
+            alert('Thank you for your application! We will review your submission and get back to you within 2-3 business days.');
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Form validation
+        document.querySelectorAll('input[required], select[required], textarea[required]').forEach(field => {
+            field.addEventListener('blur', function() {
+                if (!this.value.trim()) {
+                    this.style.borderColor = '#ff6b6b';
+                } else {
+                    this.style.borderColor = '#20b2aa';
+                }
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
