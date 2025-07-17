@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David Thompson - Personal Trainer Profile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0d1421 100%);
+            color: #fff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            color: #00d4ff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+        }
+
+        .profile-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .profile-sidebar {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: fit-content;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .profile-name {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: #00d4ff;
+        }
+
+        .profile-rating {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .stars {
+            color: #ffd700;
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+
+        .rating-text {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .stat {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+
+        .stat-value {
+            color: #00d4ff;
+            font-weight: bold;
+        }
+
+        .hourly-rate {
+            text-align: center;
+            font-size: 2rem;
+            color: #00d4ff;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
+        }
+
+        .profile-main {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section h2 {
+            color: #00d4ff;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .specialties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .specialty-tag {
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .bio-text {
+            color: #e0e0e0;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .certifications {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .cert-card {
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .cert-title {
+            font-weight: bold;
+            color: #00d4ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-org {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+
+        .reviews-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .review-card {
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .reviewer-name {
+            font-weight: bold;
+            color: #00d4ff;
+        }
+
+        .review-text {
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .availability-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .day-card {
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .day-name {
+            font-weight: bold;
+            color: #00d4ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .day-hours {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .availability-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <header class="header">
+            <h1>Trainer Profile</h1>
+            <p>Professional fitness coaching for your success</p>
+        </header>
+
+        <div class="profile-container">
+            <div class="profile-sidebar">
+                <div class="profile-avatar">DT</div>
+                <h2 class="profile-name">David Thompson</h2>
+                <div class="profile-rating">
+                    <span class="stars">★★★★☆</span>
+                    <div class="rating-text">4.7 (203 reviews)</div>
+                </div>
+                
+                <div class="profile-stats">
+                    <div class="stat">
+                        <div class="stat-value">5.2 mi</div>
+                        <div>away</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">300+</div>
+                        <div>clients</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">10+</div>
+                        <div>years</div>
+                    </div>
+                </div>
+
+                <div class="hourly-rate">$78/hour</div>
+                
+                <button class="contact-btn">Contact Trainer</button>
+            </div>
+
+            <div class="profile-main">
+                <div class="section">
+                    <h2>About Me</h2>
+                    <div class="specialties">
+                        <span class="specialty-tag">Basketball</span>
+                        <span class="specialty-tag">Soccer</span>
+                        <span class="specialty-tag">Football</span>
+                        <span class="specialty-tag">Strength Training</span>
+                    </div>
+                    <p class="bio-text">
+                        With over 10 years of experience in professional sports training, I specialize in helping athletes and fitness enthusiasts reach their peak performance. My approach combines proven training methodologies with personalized attention to ensure every client achieves their goals.
+                    </p>
+                    <p class="bio-text">
+                        I've worked with professional athletes, college teams, and everyday fitness enthusiasts. Whether you're looking to improve your game performance, build strength, or maintain fitness, I'll create a customized program that fits your needs and lifestyle.
+                    </p>
+                </div>
+
+                <div class="section">
+                    <h2>Certifications & Qualifications</h2>
+                    <div class="certifications">
+                        <div class="cert-card">
+                            <div class="cert-title">Certified Strength & Conditioning Specialist</div>
+                            <div class="cert-org">National Strength & Conditioning Association</div>
+                        </div>
+                        <div class="cert-card">
+                            <div class="cert-title">Personal Training Certification</div>
+                            <div class="cert-org">American Council on Exercise</div>
+                        </div>
+                        <div class="cert-card">
+                            <div class="cert-title">Sports Performance Specialist</div>
+                            <div class="cert-org">National Academy of Sports Medicine</div>
+                        </div>
+                        <div class="cert-card">
+                            <div class="cert-title">Bachelor's in Exercise Science</div>
+                            <div class="cert-org">University of California, Berkeley</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Client Reviews</h2>
+                    <div class="reviews-grid">
+                        <div class="review-card">
+                            <div class="review-header">
+                                <div class="reviewer-name">Sarah M.</div>
+                                <div class="stars">★★★★★</div>
+                            </div>
+                            <p class="review-text">
+                                "David transformed my basketball game completely! His training methods are scientifically sound and incredibly effective. I've seen massive improvements in my agility and strength."
+                            </p>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-header">
+                                <div class="reviewer-name">Mike R.</div>
+                                <div class="stars">★★★★★</div>
+                            </div>
+                            <p class="review-text">
+                                "Best trainer I've ever worked with. David's knowledge of sports conditioning is unmatched. He helped me recover from an injury and come back stronger than ever."
+                            </p>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-header">
+                                <div class="reviewer-name">Jessica L.</div>
+                                <div class="stars">★★★★☆</div>
+                            </div>
+                            <p class="review-text">
+                                "Professional, knowledgeable, and motivating. David creates workouts that are challenging but achievable. I've made more progress in 3 months than I did in years of training alone."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Availability</h2>
+                    <div class="availability-grid">
+                        <div class="day-card">
+                            <div class="day-name">Mon</div>
+                            <div class="day-hours">6AM - 8PM</div>
+                        </div>
+                        <div class="day-card">
+                            <div class="day-name">Tue</div>
+                            <div class="day-hours">6AM - 8PM</div>
+                        </div>
+                        <div class="day-card">
+                            <div class="day-name">Wed</div>
+                            <div class="day-hours">6AM - 8PM</div>
+                        </div>
+                        <div class="day-card">
+                            <div class="day-name">Thu</div>
+                            <div class="day-hours">6AM - 8PM</div>
+                        </div>
+                        <div class="day-card">
+                            <div class="day-name">Fri</div>
+                            <div class="day-hours">6AM - 6PM</div>
+                        </div>
+                        <div class="day-card">
+                            <div class="day-name">Sat</div>
+                            <div class="day-hours">8AM - 4PM</div>
+                        </div>
+                        <div class="day-card">
+                            <div class="day-name">Sun</div>
+                            <div class="day-hours">Closed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

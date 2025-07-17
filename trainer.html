@@ -67,14 +67,14 @@
                     <div class="sport-chips">
                         <div class="sport-chip" onclick="toggleSport(this)">Personal Training</div>
                         <div class="sport-chip" onclick="toggleSport(this)">Yoga</div>
-                        <div class="sport-chip" onclick="toggleSport(this)">Pilates</div>
+                        <div class="sport-chip" onclick="toggleSport(this)">Soccer</div>
                         <div class="sport-chip" onclick="toggleSport(this)">CrossFit</div>
                         <div class="sport-chip" onclick="toggleSport(this)">Boxing</div>
                         <div class="sport-chip" onclick="toggleSport(this)">Running</div>
                         <div class="sport-chip" onclick="toggleSport(this)">Swimming</div>
-                        <div class="sport-chip" onclick="toggleSport(this)">Cycling</div>
+                        <div class="sport-chip" onclick="toggleSport(this)">Football</div>
                         <div class="sport-chip" onclick="toggleSport(this)">Martial Arts</div>
-                        <div class="sport-chip" onclick="toggleSport(this)">Dance</div>
+                        <div class="sport-chip" onclick="toggleSport(this)">Basketball</div>
                         <div class="sport-chip" onclick="toggleSport(this)">Strength Training</div>
                         <div class="sport-chip" onclick="toggleSport(this)">Nutrition</div>
                     </div>
@@ -134,7 +134,7 @@
                 name: "David Thompson",
                 rating: 4.7,
                 reviews: 203,
-                specialties: ["Running", "Cycling", "Triathlon"],
+                specialties: ["Basketball", "Soccer", "Football"],
                 experience: "10+ years",
                 clients: 300,
                 price: 78,
@@ -147,7 +147,7 @@
                 name: "Lisa Park",
                 rating: 4.9,
                 reviews: 94,
-                specialties: ["Swimming", "Water Aerobics", "Rehabilitation"],
+                specialties: ["Basketball", "Personal Training", "Rehabilitation"],
                 experience: "8+ years",
                 clients: 120,
                 price: 72,
@@ -199,7 +199,9 @@
                         <span>📅 ${trainer.experience}</span>
                     </div>
                     <div class="trainer-price">$${trainer.price}/hour</div>
-                    <button class="contact-btn">Contact Trainer</button>
+                    <a href="profile.html">
+                        <button class="contact-btn">Contact Trainer</button>
+                    </a>
                 </div>
             `).join('');
         }
